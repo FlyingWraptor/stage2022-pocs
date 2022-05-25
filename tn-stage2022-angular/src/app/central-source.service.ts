@@ -21,11 +21,13 @@ export class CentralSourceService {
   }
 
   updateMessages(values: Array<Message>) {
+    console.log('Updating messages');
     this.messagesList = values;
     this.messageSubject.next(values);
   }
 
   deleteMessage(id: number) {
+    console.log('Removing message from messagesList');
     const messages = this.messagesList.filter(x => x.id !== id);
     this.updateMessages(messages);
   }

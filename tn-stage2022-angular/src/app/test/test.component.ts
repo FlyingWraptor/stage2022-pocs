@@ -1,4 +1,5 @@
 import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
+import { CentralSourceService } from '../central-source.service';
 
 @Component({
   selector: 'app-test',
@@ -9,12 +10,7 @@ export class TestComponent implements OnInit {
   @Input()
   public objectData: any;
 
-  @Output()
-  public deleted: EventEmitter<number>;
-
-  constructor() {
-    this.deleted = new EventEmitter();
-  }
+  constructor(private centralSource: CentralSourceService) {}
 
   ngOnInit() {
 
@@ -22,6 +18,6 @@ export class TestComponent implements OnInit {
 
   deleteMessage() {
     console.log('Deleting message in test-component');
-    this.deleted.emit(this.objectData.id);
+    this.centralSource.deleteMessage(this.objectData.id);
   }
 }

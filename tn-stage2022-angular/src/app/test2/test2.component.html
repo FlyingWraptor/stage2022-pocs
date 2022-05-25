@@ -1,5 +1,4 @@
 <ng-container>
-  <h1>{{ stringData }}</h1>
-  <app-test *ngFor="let obj of arrayData" [objectData]="obj"
-    (deleted)="deleteMessage($event)"></app-test>
+  <h1>{{ folder }}</h1>
+  <app-test *ngFor="let obj of (messages | async)" [objectData]="obj"></app-test>
 </ng-container>

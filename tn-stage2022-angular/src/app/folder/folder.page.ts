@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { AfterViewInit, Component } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { CentralSourceService } from '../central-source.service';
 import { Message } from '../message';
@@ -8,7 +8,7 @@ import { Message } from '../message';
   templateUrl: './folder.page.html',
   styleUrls: ['./folder.page.scss'],
 })
-export class FolderPage implements OnInit {
+export class FolderPage implements AfterViewInit {
   public folder: string;
 
   public messages: Array<Message>;
@@ -16,11 +16,10 @@ export class FolderPage implements OnInit {
   constructor(private activatedRoute: ActivatedRoute,
     private centralSource: CentralSourceService) { }
 
-  ngOnInit() {
+  ngAfterViewInit() {
     this.folder = this.activatedRoute.snapshot.paramMap.get('id');
-
     if (this.folder === 'Inbox') {
-      this.messages = [
+      const messages = [
         {
           id: 1,
           title: 'Your yearly bonus has arrived',
@@ -43,15 +42,7 @@ export class FolderPage implements OnInit {
           description: 'My wife made some bagels, I don\'t like them, so I left them in the cafeteria. PLEASE be sure to take one.'
         }
       ];
-    } else {
-      this.messages = [];
+      this.centralSource.updateMessages(messages);
     }
-    this.centralSource.updateMessages(this.messages);
   }
-
-  deleteMessage(id: number) {
-    console.log('Received deletion on folder page, removing from local list.');
-    this.messages = this.messages.filter(x => x.id !== id);
-  }
-
 }
