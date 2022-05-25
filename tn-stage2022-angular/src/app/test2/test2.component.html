@@ -1,0 +1,5 @@
+<ng-container>
+  <h1>{{ stringData }}</h1>
+  <app-test *ngFor="let obj of arrayData" [objectData]="obj"
+    (deleted)="deleteMessage($event)"></app-test>
+</ng-container>

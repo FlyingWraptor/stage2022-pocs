@@ -1,0 +1,15 @@
+<ion-item lines="full">
+  <ion-label>
+    <div>
+      <h2>{{ objectData.title }}</h2>
+      <span>From: </span>
+      <span class="email">{{ objectData.from }}</span>
+      <span> to: </span>
+      <span class="email">{{ objectData.to }}</span>
+      <p>{{ objectData.description }}</p>
+    </div>
+  </ion-label>
+  <ion-button size="large" (click)="deleteMessage()">
+    <span>Delete</span>
+  </ion-button>
+</ion-item>
