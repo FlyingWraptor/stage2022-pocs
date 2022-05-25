@@ -4,6 +4,7 @@ import { TestComponent } from '../test/test.component';
 import { Test2Component } from '../test2/test2.component';
 import { IonicModule } from '@ionic/angular';
 import { CentralSourceService } from '../central-source.service';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -14,7 +15,8 @@ import { CentralSourceService } from '../central-source.service';
   ],
   imports: [
     CommonModule,
-    IonicModule
+    IonicModule,
+    HttpClientModule
   ],
   exports: [
     TestComponent,
