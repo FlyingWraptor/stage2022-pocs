@@ -1,0 +1,7 @@
+{
+  "name": "tn-stage2022-vue",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "vue"
+}
