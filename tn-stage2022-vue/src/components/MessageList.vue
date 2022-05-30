@@ -1,11 +1,11 @@
 <template>
   <h1>{{ title }}</h1>
-  <message-block v-for="message of messages" :message="message"
-    :key="message.id"
-    @deleted="deleteMessage"></message-block>
+  <message-block v-for="message of store.messages" :message="message"
+    :key="message.id"></message-block>
 </template>
 
 <script>
+import { useStore } from '@/store'
 import MessageBlock from './MessageBlock.vue'
 
 
@@ -17,20 +17,11 @@ export default {
     title: {
       required: true,
       type: String
-    },
-    messages: {
-      required: true,
-      type: Array
     }
   },
-  emits: {
-    deleted: Number
-  },
-  methods: {
-    deleteMessage (id) {
-      console.log('Received delete for', id, 'emitting...')
-      this.$emit('deleted', id)
-    }
+  setup () {
+    const store = useStore()
+    return { store }
   }
 }
 </script>

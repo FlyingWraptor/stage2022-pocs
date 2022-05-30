@@ -17,6 +17,7 @@
 </template>
 
 <script>
+import { useStore } from '@/store';
 import { IonButton, IonItem, IonLabel } from '@ionic/vue';
 
 export default {
@@ -31,13 +32,17 @@ export default {
       type: Object
     }
   },
-  emits: {
-    deleted: Number
+  setup() {
+    const store = useStore()
+
+    return { store }
   },
   methods: {
     deleteMessage() {
-      console.log('Emitting delte message for', this.message.id)
-      this.$emit('deleted', this.message.id)
+      console.log('Emitting delete message for', this.message.id)
+      const id = this.message.id
+
+      this.store.deleteMessage(id)
     }
   }
 }
