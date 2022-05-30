@@ -39,7 +39,7 @@ export default {
   },
   methods: {
     deleteMessage() {
-      console.log('Emitting delete message for', this.message.id)
+      console.log('Deleting message for', this.message.id)
       const id = this.message.id
 
       this.store.deleteMessage(id)
