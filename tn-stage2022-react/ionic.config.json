@@ -1,0 +1,7 @@
+{
+  "name": "tn-stage2022-react",
+  "integrations": {
+    "capacitor": {}
+  },
+  "type": "react"
+}
