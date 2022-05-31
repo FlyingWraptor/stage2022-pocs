@@ -1,28 +1,21 @@
 import { FC } from 'react';
+import { useSelector } from 'react-redux';
 import { Message } from '../../interfaces/Message';
 import MessageBlock from '../MessageBlock/MessageBlock';
 
 import './MessageList.module.css'
 
 interface MessageListProps {
-  folder: String,
-  messages: Message[],
-
-  deleteHandler: Function
+  folder: String
 }
 
-const MessageList: FC<MessageListProps> = ({ folder, messages, deleteHandler }) => {
-
-  const deleteMessage = (id: number) => {
-    console.log('Deleting', id, 'using handler prop')
-    deleteHandler(id)
-  }
+const MessageList: FC<MessageListProps> = ({ folder }) => {
+  const messages = useSelector((state: any) => state.messages).value
 
   return <>
       <h1>{folder}</h1>
-
-      {messages.map((message) => {
-        return <MessageBlock key={message.id} message={message} deleteHandler={deleteMessage} />
+      {messages.map((message: Message) => {
+        return <MessageBlock key={message.id} message={message} />
       })}
     </>
 }

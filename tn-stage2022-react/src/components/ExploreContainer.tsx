@@ -1,5 +1,6 @@
-import { FC, useEffect, useState } from 'react';
-import { Message } from '../interfaces/Message';
+import { FC, useEffect } from 'react';
+import { useDispatch } from 'react-redux';
+import { update } from '../store/slices/messages';
 import './ExploreContainer.css';
 import MessageList from './MessageList/MessageList';
 
@@ -8,17 +9,12 @@ interface ContainerProps {
 }
 
 const ExploreContainer: FC<ContainerProps> = ({ name }) => {
-  const messageList: Message[] = []
-  const [messages, setMessages] = useState(messageList)
-
-
-  const deleteHandler = (id: Number) => {
-    setMessages(messages.filter(x => x.id !== id))
-  }
+  const dispatch = useDispatch()
 
   useEffect(() => {
     if (name === 'Inbox') {
-      setMessages([
+      console.log('Setting Inbox messages')
+      dispatch(update([
         {
           id: 1,
           title: 'Your yearly bonus has arrived',
@@ -40,14 +36,15 @@ const ExploreContainer: FC<ContainerProps> = ({ name }) => {
           to: 'Sales department',
           description: 'My wife made some bagels, I don\'t like them, so I left them in the cafeteria. PLEASE be sure to take one.'
         }
-      ])
+      ]))
     } else {
-      setMessages([])
+      console.log('Clearing messages')
+      dispatch(update([]))
     }
-  }, [name])
+  }, [name, dispatch])
 
   return <div className="container">
-      <MessageList folder={name} messages={messages} deleteHandler={deleteHandler} />
+      <MessageList folder={name} />
     </div>;
 }
 
