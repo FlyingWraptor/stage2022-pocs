@@ -35,6 +35,7 @@ import { IonApp, IonContent, IonIcon, IonItem, IonLabel, IonList, IonListHeader,
 import { defineComponent, ref } from 'vue';
 import { useRoute } from 'vue-router';
 import { archiveOutline, archiveSharp, bookmarkOutline, bookmarkSharp, heartOutline, heartSharp, mailOutline, mailSharp, paperPlaneOutline, paperPlaneSharp, trashOutline, trashSharp, warningOutline, warningSharp } from 'ionicons/icons';
+import { useStore } from './store';
 
 export default defineComponent({
   name: 'App',
@@ -100,6 +101,23 @@ export default defineComponent({
     }
     
     const route = useRoute();
+
+    const store = useStore();
+
+    store.fetchInterceptors.push((url, init) => {
+      console.log('Interceptor #1')
+      console.log('Initial request for', url, 'using init parameters', init)
+      console.log('Changing localhost in url to 127.0.0.1\n\n')
+      url = url.replace(/localhost/g, '127.0.0.1')
+
+      return [url, init]
+    })
+    store.fetchInterceptors.push((url, init) => {
+      console.log('Interceptor #2')
+      console.log('Attempting to send request to', url, 'using init parameters', init, '\n\n')
+
+      return [url, init]
+    })
     
     return { 
       selectedIndex,
