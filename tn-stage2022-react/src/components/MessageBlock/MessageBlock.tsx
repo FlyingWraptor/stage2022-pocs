@@ -1,8 +1,8 @@
 import { IonButton, IonItem, IonLabel } from '@ionic/react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { Message } from '../../interfaces/Message';
-import { remove } from '../../store/slices/messages';
+import store from '../../store';
+import { removeMessage, update } from '../../store/slices/messages';
 import './MessageBlock.module.css';
 
 interface MessageBlockProps {
@@ -10,11 +10,10 @@ interface MessageBlockProps {
 }
 
 const MessageBlock: FC<MessageBlockProps> = ({ message }) => {
-  const dispatch = useDispatch()
 
   const deleteMessage = () => {
     console.log('Emitting delete message for', message.id)
-    dispatch(remove(message.id))
+    store.dispatch(removeMessage(message.id))
   }
 
   return <IonItem lines="full">
