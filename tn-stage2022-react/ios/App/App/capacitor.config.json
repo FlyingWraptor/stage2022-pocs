@@ -1,0 +1,6 @@
+{
+	"appId": "io.ionic.starter",
+	"appName": "tn-stage2022-react",
+	"webDir": "build",
+	"bundledWebRuntime": false
+}
